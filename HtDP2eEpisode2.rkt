@@ -1,0 +1,148 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname HtDP2eEpisode2) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp") (lib "universe.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp") (lib "universe.rkt" "teachpack" "2htdp")) #f)))
+(require 2htdp/image)
+
+;;Question 11
+(define (orgin-distance2D x y)
+  (sqrt (+ (* x x) (* y y))))
+;;Question 12
+(define (cvolume x)
+  (* x x x))
+;;Question 13
+(define (string-first s)
+  (if (string? s)
+      (if (> (string-length s) 0)
+          (string-ith s 0)
+          "string is empty")
+      "Please type-in a string"))
+
+(define (string-last s)
+  (if (string? s)
+      (if (> (string-length s) 0)
+          (string-ith s (- (string-length s) 1))
+          "string is empty")
+      "Please type-in a string"))
+
+;;Question 15
+(define (===> sunny friday)
+  (if (or (not sunny) friday)
+  #true
+  #false
+  ))
+
+;;Question 16
+(define (image-area picture)
+  (* (image-width picture) (image-height picture)))
+
+;;Question 17
+(define (image-classify picture)
+  (cond
+    [(> (image-height picture) (image-width picture)) "tall"]
+    [(= (image-height picture) (image-width picture)) "square"]
+    [(< (image-height picture) (image-width picture)) "wide"]))
+
+;;Question 18
+(define (string-join s1 s2)
+  (string-append (string-append s1 "_") s2))
+
+;;Question 19
+(define (string-insert str ith)
+  (if (string? str)
+      (if (> (string-length str) 0)
+          (if (> (string-length str) ith)
+              (string-append
+               (string-append (substring str 0 ith)
+                              "_")
+               (substring str ith))
+              "ith is out-of-range")
+          (string-append str "_"))
+      "Please type-in a string"))
+
+;;Question 20
+(define (string-delete str ith)
+  (if (string? str)
+      (if (> (string-length str) ith)
+          (string-append (substring str 0 ith) (substring str (+ ith 1)))
+          "Please Check if ith is out-of-range")
+      "Please type-in a string"))
+
+;;Question 21 Step
+(define (ff a)
+  (* 10 a))
+
+;(+ (ff 1) (ff 1))
+;; DrRacket并没有复用计算结果
+
+;;Question 22 Step
+(define (distance-to-orgin x y)
+  (sqrt (+ (sqr x) (sqr y))))
+
+;(distance-to-orgin 3 4)
+
+;;Question 23 略
+;;Questino 24
+(define (==> x y)
+  (or (not x) y))
+
+;(==> #true #false)
+
+;;Question 25
+;;需要增加零时变量将Height和Width存起来，否则会重复求取高和宽
+
+;;Question 26
+(define (string-insert2 s i)
+  (string-append (substring s 0 i)
+                 "_"
+                 (substring s i)))
+;(string-insert2 "helloworld" 6)
+;; hellow_orld
+
+;;Question 27
+;; 合约: profit : number -> number
+;; 用途说明: 给定票价,收益是收入和支出之差
+;; 例子:
+;; Header: (define (profit ticket-price) ...)
+(define (profit ticket-price)
+  (- (revenue ticket-price)
+     (cost ticket-price)))
+
+;; 测试:
+
+;; 合约: revenue : number -> number
+;; 用途说明: 给定票价,计算收入
+;; 例子:
+;; Header: (define (revenue ticket-price) ...)
+(define (revenue ticket-price)
+  (* (attendees ticket-price)
+     ticket-price))
+
+;; 测试:
+
+;; 合约: cost : number->number
+;; 用途说明: 给定票价,计算支出
+;; 例子:
+;; Header: (define (cost ticket-price) ...)
+(define fixed-cost 180)
+(define person-cost 0.04)
+
+(define (cost ticket-price)
+  (+ fixed-cost
+     (* (attendees ticket-price)
+            person-cost)))
+
+;; 测试:
+
+;; 合约: attendees : number -> number
+;; 用途说明: 给定票价,计算观众数
+;; 例子:
+;; Header: (define (attendees ticket-price))
+(define intercept 120)
+(define change-rate (/ 15 0.1))
+(define base-price 5)
+(define (attendees ticket-price)
+  (- (* change-rate
+        (- base-price ticket-price))
+     intercept))
+
+;;Question 28 29 略
