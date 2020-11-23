@@ -2,7 +2,6 @@
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname HtDP2eEpisode2) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp")) #f)))
 (require 2htdp/image)
-(require 2htdp/universe)
 
 ;;Question 11
 (define (orgin-distance2D x y)
@@ -148,10 +147,4 @@
 
 ;;Question 28 29 略
 
-;;Tips:
-;;为每个任务分配一个函数
 ;;全局常量使用大写定义
-
-(define (number->square s)
-  (square s "solid" "red"))
-(define (reset s ke) 100)
