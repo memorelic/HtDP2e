@@ -39,3 +39,24 @@
 ;;输入"myname"获得"mynam"
 (define (string-remove-last string)
   (substring string 0 ( - (string-length string) 1)))
+
+;;QUestion 39
+;;车辆与世界的定义
+(define WIDTH-OF-WORLD 200)
+(define WHEEL-RADIUS 5)
+
+(define WHEEL-DISTANCE (* WHEEL-RADIUS 2))
+(define CAR-LENGTH (* WHEEL-RADIUS 8))
+(define CAR-MID-LENGTH (* WHEEL-RADIUS 5))
+(define CAR-FRONT-HEIGHT (* 2 WHEEL-RADIUS))
+(define CAR-MID-HEIGHT (* 1.5 WHEEL-RADIUS))
+
+(define WHEEL (circle WHEEL-RADIUS "solid" "black"))
+(define SPACE (rectangle WHEEL-DISTANCE (* 2 WHEEL-RADIUS) "solid" "white"))
+(define BOTH-WHEELS (beside WHEEL SPACE WHEEL))
+(define CARBOTTOM (rectangle CAR-LENGTH CAR-FRONT-HEIGHT "solid" "red"))
+(define CARTOP (rectangle CAR-MID-LENGTH CAR-MID-HEIGHT "solid" "red"))
+(define CAR (overlay/offset (above CARTOP CARBOTTOM) 0 (* WHEEL-RADIUS 2) BOTH-WHEELS))
+;;WorldState表示当前程序状态
+;;WorldState -> image
+;;big-bang使用此函数将当前状态转换为图像
